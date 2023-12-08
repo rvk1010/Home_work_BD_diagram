@@ -1,0 +1,45 @@
+CREATE TABLE IF NOT EXISTS singer (
+	singer_id serial PRIMARY KEY,
+	name_singer varchar(40) NOT NULL,
+	);
+
+CREATE TABLE IF NOT EXISTS genre (
+	genre_id serial PRIMARY KEY,
+	name_genre varchar(60) NOT NULL,
+	);
+
+CREATE TABLE IF NOT EXISTS trek (
+	trek_id serial PRIMARY KEY,
+	name_trek varchar(60) NOT NULL,
+	duration real NOT NULL,
+	);
+
+CREATE TABLE IF NOT EXISTS mixtape (
+	mixtape_id serial PRIMARY KEY,
+	name_mixtape varchar(60) NOT NULL,
+	year_mixtape date NOT NULL,
+	);
+
+CREATE TABLE IF NOT EXISTS album (
+	album_id serial PRIMARY KEY,
+	name_album varchar(40) NOT NULL,
+	year_album date NOT NULL
+	trek_id int REFERENCES trek,
+	);
+
+CREATE TABLE IF NOT EXISTS singer_genre (
+	singer_genre_id serial PRIMARY KEY,
+	singer_id serial REFERENCES singer,
+	genre_id serial REFERENCES genre,
+	);
+
+CREATE TABLE IF NOT EXISTS singer_albume (
+	singer_album_id serial PRIMARY KEY,
+	singer_id serial REFERENCES singer,
+	album_id serial REFERENCES album,
+	);
+CREATE TABLE IF NOT EXISTS trek_mixtape (
+	trek_mixtape_id serial PRIMARY KEY,
+	trek_id serial REFERENCES trek,
+	mixtape_id serial REFERENCES mixtape,
+	);
